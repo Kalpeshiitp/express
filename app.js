@@ -6,6 +6,7 @@ const adminRouter = require("./routes/admin");
 const shopRouter = require("./routes/shop");
 const contactRouter = require("./routes/contact");
 const successRouter = require("./routes/success")
+const Page404Controller = require('./controllers/404')
 const path = require('path')
 
 const app = express();
@@ -16,10 +17,7 @@ app.use('/admin',adminRouter);
 app.use(shopRouter);
 app.use(contactRouter);
 app.use(successRouter);
-app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname,'view','404.html'));
-});
-
+app.use(Page404Controller.pageNotFound);
 
 const server = http.createServer(app);
 server.listen(9009);
